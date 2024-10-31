@@ -15,15 +15,15 @@ configureGenkit({
   enableTracingAndMetrics: true,
 })
 
-export const menuSuggestionFlow = defineFlow(
+export const translationFlow = defineFlow(
   {
-    name: 'menuSuggestionFlow',
+    name: 'translationFlow',
     inputSchema: z.string(),
     outputSchema: z.string(),
   },
-  async (subject) => {
+  async (text) => {
     const llmResponse = await generate({
-      prompt: `Suggest an item for the menu of a ${subject} themed restaurant`,
+      prompt: `If the following text is in Japanese, translate it into English; if the text is not in Japanese, translate it into Japanese.\n\n## Text:\n${text}`,
       model: 'ollama/gemma2',
       config: {
         temperature: 1,
