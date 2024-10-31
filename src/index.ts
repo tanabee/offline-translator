@@ -23,7 +23,7 @@ export const translationFlow = defineFlow(
   },
   async (text) => {
     const llmResponse = await generate({
-      prompt: `If the following text is in Japanese, translate it into English; if the text is not in Japanese, translate it into Japanese.\n\n## Text:\n${text}`,
+      prompt: `Translate the following text into both English and Japanese.\n\n## Text:\n${text}\n\n## English:`,
       model: 'ollama/gemma2',
       config: {
         temperature: 1,
