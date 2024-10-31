@@ -7,7 +7,7 @@ import { ollama } from 'genkitx-ollama'
 configureGenkit({
   plugins: [
     ollama({
-      models: [{ name: 'gemma' }],
+      models: [{ name: 'gemma2' }],
       serverAddress: 'http://127.0.0.1:11434',
     }),
   ],
@@ -24,7 +24,7 @@ export const menuSuggestionFlow = defineFlow(
   async (subject) => {
     const llmResponse = await generate({
       prompt: `Suggest an item for the menu of a ${subject} themed restaurant`,
-      model: 'ollama/gemma',
+      model: 'ollama/gemma2',
       config: {
         temperature: 1,
       },
