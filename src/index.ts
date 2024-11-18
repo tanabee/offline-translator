@@ -1,37 +1,26 @@
-import * as z from 'zod'
-import { generate } from '@genkit-ai/ai'
-import { configureGenkit } from '@genkit-ai/core'
-import { defineFlow, startFlowsServer } from '@genkit-ai/flow'
+import { genkit, z } from 'genkit'
 import { ollama } from 'genkitx-ollama'
 
-configureGenkit({
+const ai = genkit({
   plugins: [
     ollama({
       models: [{ name: 'gemma2' }],
       serverAddress: 'http://127.0.0.1:11434',
     }),
   ],
-  logLevel: 'debug',
-  enableTracingAndMetrics: true,
+  model: 'ollama/gemma2',
 })
 
-export const translationFlow = defineFlow(
+const translationFlow = ai.defineFlow(
   {
     name: 'translationFlow',
     inputSchema: z.string(),
-    outputSchema: z.string(),
   },
-  async (text) => {
-    const llmResponse = await generate({
-      prompt: `Translate the following text into both English and Japanese.\n\n## Text:\n${text}\n\n## English:`,
-      model: 'ollama/gemma2',
-      config: {
-        temperature: 1,
-      },
-    })
-
-    return llmResponse.text()
+  async input => {
+    const prompt = `Translate the following text into both English and Japanese.\n\n## Text:\n${input}\n\n## English:`
+    const { text } = await ai.generate(prompt)
+    return text
   }
 )
 
-startFlowsServer()
+ai.startFlowServer({ flows: [translationFlow] })
