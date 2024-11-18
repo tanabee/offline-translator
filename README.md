@@ -10,6 +10,7 @@ The following tools need to be installed:
 - ollama
 - gemma2
 
-## References 
+## Articles
 
-- [Master Gemma2 and Genkit](https://medium.com/firebase-developers/how-to-develop-using-the-gemma2-model-in-genkit-085f22ce68f3)
+- English: [Implementing an Offline Translation Tool with Genkit and Gemma2](https://medium.com/firebase-developers/implementing-an-offline-translation-tool-with-genkit-and-gemma2-4bda310ff074)
+- Japanese: [Genkit x Gemma2 でオフライン翻訳ツールを作ってみた](https://zenn.dev/tanabee/articles/eb3ab56111eb2e)
